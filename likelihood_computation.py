@@ -18,15 +18,12 @@ def likelihood(X, A, B, pi):
 			tmp.append(0.0)
 		alpha.append(tmp)
 
-	#  print(alpha)
-
 	#  bottom-up approach 
 	for t in range (len(X) + 1):
 
 		if t == 0:
 			for i in range(len(z)):
 				alpha[i][0]= pi[i]
-
 
 		else:
 			current_observation = X[i-1]
@@ -38,13 +35,18 @@ def likelihood(X, A, B, pi):
 					# print("j, t: ", j, t)
 					# print(alpha[i][t-1], A[i][j], B[j][current_observation])
 					alpha[j][t] += alpha[i][t-1]*A[i][j]*B[j][current_observation]
-	# print(alpha)
+
+
 	# likelihood computation
 	likelihood_probability = 0.0
 	for state in range(len(z)):
 		likelihood_probability += alpha[state][len(X)-1]
 
+
 	return likelihood_probability
+
+
+
 
 #  hidden state z, observation x, initial probability pi, transition matrix A, emission matrix B
 z = ['Sunny', 'Rainy']
@@ -63,7 +65,7 @@ B = [[0.7, 0.3],
 X = []
 for i in range (3):
 	X.append(random.randint(0,1))  # (0: happy, 1: sad)
-	
+
 print("Sequence of observations", X)
 print("The likelihood probability of the given sequence of observations is", likelihood(X, A, B, pi))
 

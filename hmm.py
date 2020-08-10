@@ -39,7 +39,7 @@ for i, m in enumerate(model.means_):
              size=15, horizontalalignment='center',
              bbox=dict(alpha=0.8))
 plt.legend(loc='best')
-# plt.show()
+plt.show()
 
 
 
